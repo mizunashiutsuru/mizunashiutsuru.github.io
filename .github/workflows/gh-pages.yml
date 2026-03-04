@@ -23,11 +23,14 @@ jobs:
           node-version: ${{ matrix.node-version }}
           registry-url: https://registry.npmjs.org/
 
+      - name: Install pnpm
+        run: npm install -g pnpm
+
       - name: 📦 Install Dependencies
-        run: npm i
+        run: pnpm i
 
       - name: 🌌 Build Valaxy Blog
-        run: npm run build
+        run: NODE_OPTIONS="--max-old-space-size=6144" pnpm run build
 
       - name: 🪤 Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
